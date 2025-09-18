@@ -1,0 +1,35 @@
+# docker-compose.yml
+services:
+    app:
+        container_name: portfolio_app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        working_dir: /var/www/html
+        environment:
+            - APP_ENV=local
+            - APP_DEBUG=true
+        volumes:
+            - .:/var/www/html
+        networks:
+            - portfolio_app
+            - shared-network
+
+    nginx:
+        image: nginx:1.21-alpine
+        container_name: portfolio_nginx
+        ports:
+            - "1528:80"
+        volumes:
+            - .:/var/www/html
+            - ./conf/nginx.conf:/etc/nginx/nginx.conf
+            - ./conf/default.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - portfolio_app
+            - shared-network
+
+networks:
+    portfolio_app:
+        driver: bridge
+    shared-network:
+        external: true
