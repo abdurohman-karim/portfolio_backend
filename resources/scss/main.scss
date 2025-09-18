@@ -252,6 +252,7 @@
                     border-radius: 7px;
                     color: var(--secondary-color);
                     transition: 0.2s ease;
+                    cursor: pointer;
                     &:hover{
                         opacity: 0.8;
                     }
@@ -385,7 +386,6 @@
 // questions end
 
 @import 'components/footer';
-
 
 @import 'components/responsive';
 @import 'components/animations';

@@ -1,4 +1,10 @@
 <template>
+    <Heading
+        id="about"
+        :icon="barChart"
+        title="$_GET(<i>'About'</i>)"
+        subtitle="Utility classes help you work within the constraints of a system..."
+    />
     <div class="section about" id="about">
         <div class="container">
             <!-- статистика -->
@@ -23,6 +29,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import Heading from "./Heading.vue";
+import barChart from '@/../assets/bar-chart.png'
 
 const stats = ref([])
 const infos = ref([])

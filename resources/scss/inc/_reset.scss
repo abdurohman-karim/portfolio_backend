@@ -43,7 +43,7 @@ body{
             }
         }
         .heading__title{
-            font-family: JetBrainsMonoBold;
+            font-family: JetBrainsMonoBold, sans-serif;
             font-size: 18px;
             font-weight: 600;
             line-height: 18px;
@@ -59,7 +59,7 @@ body{
             }
         }
         .heading__text{
-            font-family: UbuntuRegular;
+            font-family: UbuntuRegular, sans-serif;
             width: 600px;
             color: var(--text-blug-light);
             font-size: 16px;
@@ -86,7 +86,7 @@ body{
     height: 2.5em;
     transform: rotate(165deg);
 }
-   
+
 .loader:before, .loader:after {
     content: "";
     position: absolute;

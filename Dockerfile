@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
     libjpeg-dev \
+    libicu-dev \
     libfreetype6-dev
 
 # Install PHP extensions

@@ -1,14 +1,19 @@
 <template>
+    <Heading
+        id="about"
+        :icon="codeBranch"
+        title="console.log(<i>'Projects'</i>)"
+        subtitle="Utility classes help you work within the constraints of a system..."
+    />
     <div class="section projects" id="projects">
         <div class="container">
-            <h2>Projects</h2>
             <div class="projects__section">
                 <a v-for="project in projects"
                    :key="project.id"
                    :href="project.link"
                    class="projects__card"
                    data-tilt data-tilt-glare data-tilt-max-glare="0.8">
-                    <img :src="project.image" class="projects__img" />
+                    <img :src="project.image" class="projects__img"  alt=""/>
                 </a>
             </div>
 
@@ -27,6 +32,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import Heading from "./Heading.vue";
+import codeBranch from "../../assets/code-branch.png";
 
 const projects = ref([])
 const pagination = ref({ page: 1, total: 1 })

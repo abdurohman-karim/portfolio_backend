@@ -1,7 +1,12 @@
 <template>
+    <Heading
+        id="about"
+        :icon="dev"
+        title="cout<<<i>'Questions'</i>;"
+        subtitle="Utility classes help you work within the constraints of a system..."
+    />
     <div class="section questions" id="questions">
         <div class="container">
-            <h2>Questions</h2>
             <div class="questions__cards">
                 <div v-for="q in questions" :key="q.id" class="questions__card">
                     <p class="card__title">{{ q.title }}</p>
@@ -16,6 +21,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import dev from "../../assets/development.png";
+import Heading from "@/components/Heading.vue";
 
 const questions = ref([])
 

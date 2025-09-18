@@ -23,7 +23,7 @@
 }
 .box {
     @include center;
-} 
+}
 */
 
 // Display mixins end
@@ -69,7 +69,7 @@
 */
 // Display Grid end
 
-// Font mixins start  
+// Font mixins start
 @mixin font($family: sans-serif, $weight: normal) {
     font-family: $family;
 
@@ -87,7 +87,7 @@
         font-weight: $weight;
     }
 }
-  
+
 /* +++ Example usage +++
 .my-text {
     @include font('Poppins', bold); // Use Poppins font with bold weight

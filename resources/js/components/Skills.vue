@@ -1,9 +1,17 @@
 <template>
+    <Heading
+        id="about"
+        :icon="cubePng"
+        title="print(<i>'Skills'</i>)"
+        subtitle="Utility classes help you work within the constraints of a system..."
+    />
     <div class="section skills" id="skills">
         <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-card__items">
-                <a v-for="skill in skills" :key="skill.id" href="#" class="item">{{ skill.name }}</a>
+            <div class="skills-card">
+                <img src="../../assets/skills.png" class="skills-card__img" alt="">
+                <div class="skills-card__items">
+                    <p v-for="skill in skills" :key="skill.id" class="item">{{ skill.name }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -11,7 +19,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import axios from 'axios';
+import Heading from "@/components/Heading.vue";
+import cubePng from "../../assets/cube.png";
 
 const skills = ref([])
 
