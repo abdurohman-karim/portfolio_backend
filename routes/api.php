@@ -19,8 +19,8 @@ Route::get('/about', function () {
             ['id' => 4, 'value' => '100+', 'label' => 'Questions'],
         ],
         'infos' => [
-            ['id' => 1, 'title' => 'Why do you never see elephants hiding in trees?', 'text' => "Because they're so good at it..."],
-            ['id' => 2, 'title' => 'Why do you never see elephants hiding in trees?', 'text' => "Because they're so good at it..."],
+            ['id' => 1, 'title' => 'Why do you never see elephants hiding in trees?', 'text' => "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat. Because the pee is silent. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat. Because the pee is silent. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat. Because the pee is silent. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat."],
+            ['id' => 2, 'title' => "Why do you never see elephants hiding in trees?", 'text' => "Because they're so good at it..."],
         ],
     ];
 });
