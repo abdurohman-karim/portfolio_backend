@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Portfolio</title>
-    @vite(['resources/scss/main.scss', 'resources/js/app.js'])
+    @vite(['resources/frontend/scss/main.scss', 'resources/frontend/js/app.js'])
 </head>
 <body>
 <div id="app"></div>

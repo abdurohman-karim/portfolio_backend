@@ -20,7 +20,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios';
-import Heading from "@/components/Heading.vue";
+import Heading from "./Heading.vue";
 import cubePng from "../../assets/cube.png";
 
 const skills = ref([])

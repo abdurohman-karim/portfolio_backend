@@ -30,7 +30,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Heading from "./Heading.vue";
-import barChart from '@/../assets/bar-chart.png'
+import barChart from '../../assets/bar-chart.png'
 
 const stats = ref([])
 const infos = ref([])

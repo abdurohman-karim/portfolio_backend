@@ -22,7 +22,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import dev from "../../assets/development.png";
-import Heading from "@/components/Heading.vue";
+import Heading from "./Heading.vue";
 
 const questions = ref([])
 
