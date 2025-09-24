@@ -22,7 +22,16 @@
                             <div class="card-inner">
                                 <p class="info-card__title">📺 Тестовый телек</p>
                                 <p class="info-card__text">Во время пина страница замирает, а внутри идёт скролл.</p>
-                                <p v-for="i in 30" :key="i">Контент строки № {{ i }} — Lorem ipsum dolor sit amet…</p>
+                                <p class="info-card__motiv">Успех приходит к тем, кто действует!</p>
+                                <p class="info-card__motiv">Каждый шаг — это победа над собой.</p>
+                                <p class="info-card__motiv">Не жди момента, создай его.</p>
+                                <p class="info-card__motiv">Трудности делают тебя сильнее.</p>
+                                <p class="info-card__motiv">Сегодняшние усилия — завтрашний результат.</p>
+                                <p class="info-card__motiv">Дисциплина побеждает мотивацию.</p>
+                                <p class="info-card__motiv">Ты можешь больше, чем думаешь.</p>
+                                <p class="info-card__motiv">Фокусируйся на цели, а не на страхе.</p>
+                                <p class="info-card__motiv">Каждый день — новый шанс.</p>
+                                <p class="info-card__motiv">Только вперёд!</p>
                             </div>
                         </div>
                     </div>
@@ -61,21 +70,19 @@ onMounted(async () => {
     const el = animatedCard.value;
     if (!el) return;
     const inner = el.querySelector(".card-inner");
+    const motivs = el.querySelectorAll(".info-card__motiv");
 
     ScrollTrigger.refresh();
 
+    // Пин карточки
     gsap.to(el, {
         scrollTrigger: {
             trigger: el,
             start: "center center",
-            end: () =>
-                "+=" +
-                Math.max(
-                    1200,
-                    inner.scrollHeight - el.offsetHeight + 400
-                ),
+            end: "+=2200",   // 👈 фиксированная длина
             scrub: true,
             pin: true,
+            pinSpacer: true,
             pinType: "transform",
             pinReparent: true,
             anticipatePin: 1,
@@ -87,7 +94,6 @@ onMounted(async () => {
         zIndex: 1000,
         ease: "power2.out",
         transformOrigin: "center center",
-        // force3D: true,
     });
 
     gsap.to(inner, {
@@ -96,14 +102,23 @@ onMounted(async () => {
         scrollTrigger: {
             trigger: el,
             start: "center center",
-            end: () =>
-                "+=" +
-                Math.max(
-                    1200,
-                    inner.scrollHeight - el.offsetHeight + 400
-                ),
+            end: "+=2200",   // 👈 те же 1800px
             scrub: true,
         },
+    });
+
+    gsap.utils.toArray(motivs).forEach((motiv, i) => {
+        gsap.from(motiv, {
+            opacity: 0,
+            y: 50,
+            ease: "none",
+            scrollTrigger: {
+                // trigger: el,
+                // start: () => "center center",
+                // end: 3200,
+                markers: false,
+            },
+        });
     });
 
     const handle = () => ScrollTrigger.refresh();

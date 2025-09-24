@@ -84,7 +84,7 @@
 .about{
     width: 100%;
     background-image: url('../assets/bg.svg');
-    height: 1750px;
+    height: 2900px;
     .container{
         display: flex;
         flex-direction: column;
@@ -153,6 +153,16 @@
                         line-height: 24px;
                         letter-spacing: 2.5%;
                         text-align: left;
+                    }
+                    .info-card__motiv{
+                        min-height: 100vh;
+                        font-family: UbuntuBold;
+                        color: var(--primary-color);
+                        font-size: 40px;
+                        font-weight: 700;
+                        line-height: 23px;
+                        letter-spacing: -1.5%;
+                        margin-top: 16px;
                     }
                 }
                 &.ic-unique{
