@@ -1,7 +1,7 @@
 <template>
     <header :class="{ open: menuOpen }" class="header">
         <div class="container">
-            <a href="#" class="header__logo"><b>m</b>eth<b>O</b>d</a>
+            <a href="#" class="header__logo"><b>sy</b>net<b>R</b>a</a>
             <nav class="nav header__nav">
                 <ul>
                     <li><a href="#home">Home</a></li>
