@@ -1,0 +1,57 @@
+name: Laravel Production Deployment
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Check if composer.json exists
+        id: check_composer
+        run: |
+          if [ -f "composer.json" ]; then
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+
+      - name: Install composer dependencies (without dev)
+        if: steps.check_composer.outputs.exists == 'true'
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev --no-progress
+
+      - name: Synchronize files to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+          SOURCE: "."
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
+          TARGET: '/home/method/web/hyperhub.uz/public_html'
+
+      - name: Run Artisan Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          script: |
+            cd /home/method/web/hyperhub.uz/public_html
+
+            # 🛠 Установка прав доступа для Laravel
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 775 storage bootstrap/cache
+
+            # ✅ Проверяем наличие artisan
+            if [ -f "artisan" ]; then
+              php artisan migrate --force
+              php artisan setup || true
+              php artisan optimize:clear
+              php artisan optimize
+            else
+              echo "Laravel artisan не найден, пропускаем команды artisan"
+            fi

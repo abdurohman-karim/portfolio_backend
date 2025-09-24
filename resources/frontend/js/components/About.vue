@@ -1,10 +1,5 @@
 <template>
-    <Heading
-        id="about"
-        :icon="barChart"
-        title="$_GET(<i>'About'</i>)"
-        subtitle="Utility classes help you work within the constraints of a system..."
-    />
+    <Heading id="about" :icon="barChart" title="$_GET(<i>'About'</i>)" subtitle="Utility classes help you work within the constraints of a system..."/>
     <div class="section about" id="about">
         <div class="container">
             <!-- статистика -->
@@ -21,11 +16,8 @@
 
             <!-- инфо-блоки -->
             <div class="info_row">
-                <!-- АНИМИРУЕМАЯ КАРТА -->
                 <div class="pin-slot" ref="pinSlot">
-                    <!-- карточка -->
                     <div class="ic-info about__info-card about__info-card--animation" ref="animatedCard">
-                        <!-- 3D/scale анимируем на отдельном слое -->
                         <div class="card-3d">
                             <div class="card-inner">
                                 <p class="info-card__title">📺 Тестовый телек</p>
@@ -36,12 +28,7 @@
                     </div>
                 </div>
 
-                <!-- остальные карты -->
-                <div
-                    class="ic-info about__info-card"
-                    v-for="info in infos"
-                    :key="info.id"
-                >
+                <div class="ic-info about__info-card" v-for="info in infos" :key="info.id">
                     <p class="info-card__title">{{ info.title }}</p>
                     <p class="info-card__text">{{ info.text }}</p>
                 </div>
@@ -51,15 +38,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import axios from "axios";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Heading from "./Heading.vue";
+import barChart from "../../assets/bar-chart.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stats = ref([]), infos = ref([]);
-const pinSlot = ref(null);
+const stats = ref([]);
+const infos = ref([]);
 const animatedCard = ref(null);
 
 onMounted(async () => {
@@ -69,100 +58,56 @@ onMounted(async () => {
 
     await nextTick();
 
-    const slot  = pinSlot.value;
-    const el    = animatedCard.value;
-    if (!slot || !el) return;
-
+    const el = animatedCard.value;
+    if (!el) return;
     const inner = el.querySelector(".card-inner");
-    const card3d = el.querySelector(".card-3d");
-
-    // Если скролл не по window (а по контейнеру с overflow:auto) — раскомментируй:
-    // ScrollTrigger.defaults({ scroller: document.querySelector('#appMain') });
-
-    const pinDistance = () => Math.max(1000, inner.scrollHeight - el.offsetHeight + 1);
-
-    let spacer = null;
-    const fixCard = () => {
-        if (el.classList.contains('is-fixed')) return;
-        const r = el.getBoundingClientRect();
-        // фиксируем габариты, чтобы при fixed не прыгало
-        el.style.width  = r.width + 'px';
-        el.style.height = r.height + 'px';
-        el.classList.add('is-fixed');
-
-        // проставка в поток, чтобы страница реально «стояла», пока карта fixed
-        if (!spacer) {
-            spacer = document.createElement('div');
-            spacer.className = 'pin-manual-spacer';
-            spacer.style.height = pinDistance() + 'px';
-            slot.parentNode.insertBefore(spacer, slot.nextSibling);
-        }
-    };
-
-    const unfixCard = () => {
-        el.classList.remove('is-fixed');
-        el.style.width  = '';
-        el.style.height = '';
-        if (spacer) { spacer.remove(); spacer = null; }
-    };
-
-    // Триггерим «фиксировать в центре» на время внутреннего скролла
-    const pinST = ScrollTrigger.create({
-        trigger: slot,
-        start: "center center",           // как только слот в центре — фиксируем
-        end: () => "+=" + pinDistance(),  // держим, пока «крутим» внутренний контент
-        onEnter: fixCard,
-        onEnterBack: fixCard,
-        onLeave: unfixCard,
-        onLeaveBack: unfixCard,
-        invalidateOnRefresh: true,
-        // markers: true,
-    });
-
-    // 3D/scale — на дочернем слое, чтобы не конфликтовать с фикс-позицией
-    const tiltTween = gsap.to(card3d, {
-        scale: 1.18,
-        rotateX: -8,
-        rotateY: 10,
-        transformOrigin: "center center",
-        ease: "power2.out",
-        force3D: true,
-        immediateRender: false,
-        scrollTrigger: {
-            trigger: slot,
-            start: "center center",
-            end:   () => "+=" + pinDistance(),
-            scrub: true,
-            invalidateOnRefresh: true,
-        },
-    });
-
-    // Внутренний «телек»-скролл, пока карта фиксирована
-    const innerTween = gsap.to(inner, {
-        y: () => -(inner.scrollHeight - el.offsetHeight),
-        ease: "none",
-        immediateRender: false,
-        scrollTrigger: {
-            trigger: slot,
-            start: "center center",
-            end:   () => "+=" + pinDistance(),
-            scrub: true,
-            invalidateOnRefresh: true,
-        },
-    });
-
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", onResize);
-
-    onBeforeUnmount(() => {
-        window.removeEventListener("resize", onResize);
-        pinST.kill();
-        tiltTween.scrollTrigger.kill();
-        innerTween.scrollTrigger.kill();
-        unfixCard();
-    });
 
     ScrollTrigger.refresh();
+
+    gsap.to(el, {
+        scrollTrigger: {
+            trigger: el,
+            start: "center center",
+            end: () =>
+                "+=" +
+                Math.max(
+                    1200,
+                    inner.scrollHeight - el.offsetHeight + 400
+                ),
+            scrub: true,
+            pin: true,
+            pinType: "transform",
+            pinReparent: true,
+            anticipatePin: 1,
+            markers: true,
+        },
+        scale: 1.2,
+        rotateX: -30,
+        rotateY: -20,
+        zIndex: 1000,
+        ease: "power2.out",
+        transformOrigin: "center center",
+        // force3D: true,
+    });
+
+    gsap.to(inner, {
+        y: () => -(inner.scrollHeight - el.offsetHeight),
+        ease: "none",
+        scrollTrigger: {
+            trigger: el,
+            start: "center center",
+            end: () =>
+                "+=" +
+                Math.max(
+                    1200,
+                    inner.scrollHeight - el.offsetHeight + 400
+                ),
+            scrub: true,
+        },
+    });
+
+    const handle = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", handle);
 });
 </script>
 

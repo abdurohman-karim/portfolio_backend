@@ -7,7 +7,7 @@
     padding: 20px;
     height: 70px;
     backdrop-filter: blur(20px);
-    z-index: 1000;
+    z-index: 1001;
     .container{
         @include flex(row, space-between, center);
         .header__logo{
@@ -63,7 +63,7 @@
                     display: none;
                 }
             }
-            
+
         }
     }
     &.open{
