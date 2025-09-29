@@ -16,24 +16,18 @@
 
             <!-- инфо-блоки -->
             <div class="info_row">
-                <div class="pin-slot" ref="pinSlot">
-                    <div class="ic-info about__info-card about__info-card--animation" ref="animatedCard">
-                        <div class="card-3d">
-                            <div class="card-inner">
-                                <p class="info-card__title">📺 Тестовый телек</p>
-                                <p class="info-card__text">Во время пина страница замирает, а внутри идёт скролл.</p>
-                                <p class="info-card__motiv">Успех приходит к тем, кто действует!</p>
-                                <p class="info-card__motiv">Каждый шаг — это победа над собой.</p>
-                                <p class="info-card__motiv">Не жди момента, создай его.</p>
-                                <p class="info-card__motiv">Трудности делают тебя сильнее.</p>
-                                <p class="info-card__motiv">Сегодняшние усилия — завтрашний результат.</p>
-                                <p class="info-card__motiv">Дисциплина побеждает мотивацию.</p>
-                                <p class="info-card__motiv">Ты можешь больше, чем думаешь.</p>
-                                <p class="info-card__motiv">Фокусируйся на цели, а не на страхе.</p>
-                                <p class="info-card__motiv">Каждый день — новый шанс.</p>
-                                <p class="info-card__motiv">Только вперёд!</p>
-                            </div>
-                        </div>
+                <div class="ic-info about__info-card" ref="animatedCard">
+                    <div class="card-inner">
+                        <p class="info-card__motiv">Успех приходит к тем, кто действует!</p>
+                        <p class="info-card__motiv">Каждый шаг — это победа над собой.</p>
+                        <p class="info-card__motiv">Не жди момента, создай его.</p>
+                        <p class="info-card__motiv">Трудности делают тебя сильнее.</p>
+                        <p class="info-card__motiv">Сегодняшние усилия — завтрашний результат.</p>
+                        <p class="info-card__motiv">Дисциплина побеждает мотивацию.</p>
+                        <p class="info-card__motiv">Ты можешь больше, чем думаешь.</p>
+                        <p class="info-card__motiv">Фокусируйся на цели, а не на страхе.</p>
+                        <p class="info-card__motiv">Каждый день — новый шанс.</p>
+                        <p class="info-card__motiv">Только вперёд!</p>
                     </div>
                 </div>
 
@@ -70,7 +64,8 @@ onMounted(async () => {
     const el = animatedCard.value;
     if (!el) return;
     const inner = el.querySelector(".card-inner");
-    const motivs = el.querySelectorAll(".info-card__motiv");
+    const slides = document.querySelectorAll(".card-inner .info-card__motiv");
+    const numSlides = slides.length;
 
     ScrollTrigger.refresh();
 
@@ -79,7 +74,7 @@ onMounted(async () => {
         scrollTrigger: {
             trigger: el,
             start: "center center",
-            end: "+=2200",   // 👈 фиксированная длина
+            end: "+=2200",
             scrub: true,
             pin: true,
             pinSpacer: true,
@@ -97,28 +92,15 @@ onMounted(async () => {
     });
 
     gsap.to(inner, {
-        y: () => -(inner.scrollHeight - el.offsetHeight),
+        xPercent: -100 * (numSlides - 1),
         ease: "none",
         scrollTrigger: {
             trigger: el,
-            start: "center center",
-            end: "+=2200",   // 👈 те же 1800px
-            scrub: true,
-        },
-    });
-
-    gsap.utils.toArray(motivs).forEach((motiv, i) => {
-        gsap.from(motiv, {
-            opacity: 0,
-            y: 50,
-            ease: "none",
-            scrollTrigger: {
-                // trigger: el,
-                // start: () => "center center",
-                // end: 3200,
-                markers: false,
-            },
-        });
+            pin: true,
+            scrub: 1,
+            start: "top top",
+            end: () => "+=" + window.innerHeight * (numSlides - 1),
+        }
     });
 
     const handle = () => ScrollTrigger.refresh();
