@@ -1,5 +1,5 @@
 <template>
-    <Heading id="about" :icon="barChart" title="$_GET(<i>'About'</i>)" subtitle="Utility classes help you work within the constraints of a system..."/>
+    <Heading id="about" :icon="barChart" title="$_GET(<i>'About'</i>)" subtitle="Crafting digital experiences with precision and purpose."/>
     <div class="section about" id="about" ref="animatedCard">
         <div class="container">
             <!-- статистика -->
