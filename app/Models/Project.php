@@ -11,4 +11,9 @@ class Project extends Model
         'link',
         'image'
     ];
+
+    public function getImageAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
 }

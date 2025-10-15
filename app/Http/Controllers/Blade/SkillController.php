@@ -24,7 +24,7 @@ class SkillController extends Controller
 
         if ($request->hasFile('icon')) {
             $filename = time() . '.' . $request->icon->getClientOriginalExtension();
-            $request->icon->storeAs('public/icons', $filename);
+            $request->file('icon')->store('icons', 'public');
             $validated['icon'] = $filename;
         }
 

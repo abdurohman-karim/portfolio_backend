@@ -3,6 +3,7 @@
 use App\Http\Controllers\Blade\AboutController;
 use App\Http\Controllers\Blade\InformationController;
 use App\Http\Controllers\Blade\ProfileController;
+use App\Http\Controllers\Blade\ProjectController;
 use App\Http\Controllers\Blade\SkillController;
 use App\Http\Controllers\Blade\StatisticController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/skills', [SkillController::class, 'index'])->name('skill');
     Route::post('/skills', [SkillController::class, 'store'])->name('skill.store');
     Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skill.destroy');
+
+    // Projects
+    Route::get('/projects', [ProjectController::class, 'index'])->name('project');
+    Route::post('/projects', [ProjectController::class, 'store'])->name('project.store');
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
