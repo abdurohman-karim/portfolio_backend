@@ -3,7 +3,7 @@
         id="about"
         :icon="cubePng"
         title="print(<i>'Skills'</i>)"
-        subtitle="Utility classes help you work within the constraints of a system..."
+        subtitle="Technologies that power my fast and reliable web applications."
     />
     <div class="section skills" id="skills">
         <div class="container">

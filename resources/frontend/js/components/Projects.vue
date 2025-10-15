@@ -3,7 +3,7 @@
         id="about"
         :icon="codeBranch"
         title="console.log(<i>'Projects'</i>)"
-        subtitle="Utility classes help you work within the constraints of a system..."
+        subtitle="A selection of my recent work showcasing creativity and technical expertise."
     />
     <div class="section projects" id="projects">
         <div class="container">

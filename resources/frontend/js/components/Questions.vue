@@ -3,7 +3,7 @@
         id="about"
         :icon="dev"
         title="cout<<<i>'Questions'</i>;"
-        subtitle="Utility classes help you work within the constraints of a system..."
+        subtitle="Got a question? Here are some quick answers that might help!"
     />
     <div class="section questions" id="questions">
         <div class="container">
