@@ -1,11 +1,11 @@
 <template>
     <Heading
-        id="about"
+        id="skills"
         :icon="cubePng"
         title="print(<i>'Skills'</i>)"
         subtitle="Technologies that power my fast and reliable web applications."
     />
-    <div class="section skills" id="skills">
+    <div class="section skills">
         <div class="container">
             <div class="skills-card">
                 <img src="../../assets/skills.png" class="skills-card__img" alt="">

@@ -1,11 +1,11 @@
 <template>
     <Heading
-        id="about"
+        id="projects"
         :icon="codeBranch"
         title="console.log(<i>'Projects'</i>)"
         subtitle="A selection of my recent work showcasing creativity and technical expertise."
     />
-    <div class="section projects" id="projects">
+    <div class="section projects">
         <div class="container">
             <div class="projects__section">
                 <a v-for="project in projects"

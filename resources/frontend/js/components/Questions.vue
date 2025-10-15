@@ -1,11 +1,11 @@
 <template>
     <Heading
-        id="about"
+        id="questions"
         :icon="dev"
         title="cout<<<i>'Questions'</i>;"
         subtitle="Got a question? Here are some quick answers that might help!"
     />
-    <div class="section questions" id="questions">
+    <div class="section questions">
         <div class="container">
             <div class="questions__cards">
                 <div v-for="q in questions" :key="q.id" class="questions__card">

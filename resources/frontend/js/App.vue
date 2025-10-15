@@ -16,15 +16,12 @@ function applyTheme() {
 }
 
 function toggleDarkMode() {
-    // включаем прелоадер
     loading.value = true
 
-    // переключаем тему
     darkMode.value = !darkMode.value
     localStorage.setItem('darkMode', darkMode.value ? 'enabled' : 'disabled')
     applyTheme()
 
-    // выключаем прелоадер через 1 секунду
     setTimeout(() => {
         loading.value = false
     }, 1000)
@@ -33,7 +30,6 @@ function toggleDarkMode() {
 onMounted(() => {
     applyTheme()
 
-    // убираем прелоадер при первой загрузке
     setTimeout(() => {
         loading.value = false
     }, 1000)
