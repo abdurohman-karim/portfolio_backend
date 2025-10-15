@@ -17,7 +17,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|string|max:255',
             'link' => 'nullable|url',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

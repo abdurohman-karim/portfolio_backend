@@ -120,7 +120,7 @@ onMounted(() => {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,7 +128,7 @@ onMounted(() => {
 }
 
 .modal {
-    background: #fff;
+    background: var(--light);
     color: #333;
     border-radius: 16px;
     padding: 2rem;
@@ -140,10 +140,11 @@ onMounted(() => {
 }
 
 .modal-title {
-    color: black;
-    font-family: UbuntuBold;
-    font-size: 1.5rem;
+    color: var(--text-dark);
+    font-family: PoppinsRegular;
+    font-size: 14px;
     margin-bottom: 1.5rem;
+    text-align: start;
 }
 
 .modal-actions {
@@ -163,12 +164,12 @@ onMounted(() => {
 }
 
 .visit-btn {
-    background: #007bff;
+    background: var(--secondary-color);
     color: #fff;
 }
 
 .visit-btn:hover {
-    background: #0056b3;
+    background: var(--primary-color);
 }
 
 .close-btn {
