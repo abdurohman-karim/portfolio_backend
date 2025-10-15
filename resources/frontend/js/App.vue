@@ -7,6 +7,7 @@ import About from './components/About.vue'
 import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
 import Questions from './components/Questions.vue'
+import Footer from "./components/Footer.vue";
 
 const darkMode = ref(localStorage.getItem('darkMode') === 'enabled')
 const loading = ref(true)
@@ -45,6 +46,7 @@ onMounted(() => {
         <Skills />
         <Projects />
         <Questions />
+        <Footer />
     </div>
 </template>
 
