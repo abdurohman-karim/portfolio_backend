@@ -5,7 +5,7 @@
                 <p>echo <i class="shine">"Welcome!"</i>;</p>
             </div>
             <div class="hero__ellipse">
-                <img src="../../assets/ellipse.png"  alt=""/>
+                <img src="../../assets/ellipse.jpg"  alt=""/>
             </div>
             <p class="hero__author">Abdurohman Karim</p>
             <p class="hero__title job">{{ text }}</p>
