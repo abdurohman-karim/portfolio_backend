@@ -10,12 +10,19 @@
             <p class="hero__author">Abdurohman Karim</p>
             <p class="hero__title job">{{ text }}</p>
             <a href="#" class="hero__button">Apply</a>
+            <svg style="display:none">
+                <filter id="filter-noise">
+                    <feTurbulence type="fractalNoise" baseFrequency="0 0" numOctaves="1" result="turbulence"/>
+                    <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10"/>
+                </filter>
+            </svg>
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import gsap from "gsap"
 
 const texts = ["Web Developer", "Full Service!", "and Web Designer", "Develop for all!", "Full-Stack Developer"]
 const text = ref("")
@@ -36,6 +43,41 @@ function typeEffect() {
 }
 
 onMounted(() => {
+    const feTurbulenceElement = document.querySelector("feTurbulence")
+    const button = document.querySelector(".hero__button")
+
+    // Применяем фильтр сразу
+    gsap.set(button, { filter: "url(#filter-noise)" })
+
+    const animationDuration = 0.4 // секунды
+
+    // Определяем анимацию шума
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 2.6 }) // каждые ~3 сек
+    tl.to(feTurbulenceElement, {
+        duration: animationDuration / 2,
+        attr: { baseFrequency: "0 0.8" },
+        ease: "power2.inOut"
+    })
+    .to(feTurbulenceElement, {
+        duration: animationDuration / 2,
+        attr: { baseFrequency: "0 0" },
+        ease: "power2.inOut"
+    })
     typeEffect()
 })
 </script>
+<style scoped>
+.hero__button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #1e40af;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.hero__button:hover {
+    transform: scale(1.05);
+}
+</style>

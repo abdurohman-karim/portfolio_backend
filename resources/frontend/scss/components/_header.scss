@@ -6,6 +6,7 @@
     flex-direction: column;
     padding: 20px;
     height: 70px;
+    background-color: var(--light-blur);
     backdrop-filter: blur(20px);
     z-index: 1001;
     .container{
@@ -33,7 +34,7 @@
                     a{
                         font-family: UbuntuMedium;
                         color: var(--text-dark);
-                        font-size: 14px;
+                        font-size: 15px;
                         font-weight: 400;
                         line-height: 16px;
                         letter-spacing: -1.5%;
