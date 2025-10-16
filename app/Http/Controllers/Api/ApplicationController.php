@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class ApplicationController extends Controller
@@ -15,6 +16,7 @@ class ApplicationController extends Controller
 
         return view('pages.application.index', compact('applications'));
     }
+
     public function apply(Request $request)
     {
         $request->validate([
@@ -29,6 +31,16 @@ class ApplicationController extends Controller
             'files.*' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
         ]);
 
+        $ipKey = 'application_count_' . $request->ip();
+
+        $count = Cache::get($ipKey, 0);
+
+        if ($count >= 3) {
+            return response()->json([
+                'message' => 'You can only send up to 3 applications per day. Try again tomorrow.'
+            ], 429);
+        }
+
         $application = Application::create($request->all());
 
         if ($request->hasFile('files')) {
@@ -39,6 +51,8 @@ class ApplicationController extends Controller
                 ]);
             }
         }
+
+        Cache::put($ipKey, $count + 1, now()->addHours(24));
 
         return response()->json([
             'message' => 'Application sent successfully',
