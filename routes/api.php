@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApplicationController;
 use App\Models\Information;
 use App\Models\Project;
 use App\Models\Question;
@@ -20,3 +21,4 @@ Route::get('/about', fn () => [
 Route::get('/skills', fn () => Skill::all());
 Route::get('/projects', fn () => Project::paginate(6));
 Route::get('/questions', fn () => Question::all());
+Route::post('/applications', [ApplicationController::class, 'apply'])->name('applications.apply');

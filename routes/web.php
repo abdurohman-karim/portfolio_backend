@@ -12,6 +12,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('app')->group(function () {
+    Route::get('/{any}', function () {
+        return view('welcome');
+    })->where('any', '.*');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -33,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('project');
     Route::post('/projects', [ProjectController::class, 'store'])->name('project.store');
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
+
+    Route::get('/applications', [\App\Http\Controllers\Api\ApplicationController::class, 'index'])->name('applications.index');
+    Route::delete('/applications/delete/{application}', [\App\Http\Controllers\Api\ApplicationController::class, 'destroy'])->name('applications.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
