@@ -13,7 +13,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('app')->group(function () {
-    Route::get('/{any}', function () {
+    Route::get('/{any?}', function () {
         return view('welcome');
     })->where('any', '.*');
 });
